@@ -8,12 +8,79 @@
     tools:context="com.home.rxandroid.ScrollingActivity"
     tools:showIn="@layout/activity_scrolling">
 
-
-    <Button
-        android:id="@+id/button_run_scheduler"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fab_margin"
-        android:text="button_run_scheduler"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/button_run_scheduler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:text="button_run_scheduler" />
+
+        <Button
+            android:id="@+id/button_run_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:text="button_run_observable" />
+
+        <Button
+            android:id="@+id/button_run_flatmap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:text="button_run_flatmap" />
+
+        <Button
+            android:id="@+id/button_run_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layerType="hardware"
+            android:text="button_run_map" />
+
+        <Button
+            android:id="@+id/button_run_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layerType="hardware"
+            android:text="button_run_range" />
+
+        <Button
+            android:id="@+id/button_run_timer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layerType="hardware"
+            android:text="button_run_timer" />
+
+        <Button
+            android:id="@+id/button_run_just"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layerType="hardware"
+            android:text="button_run_just" />
+
+        <Button
+            android:id="@+id/button_run_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="@dimen/fab_margin"
+            android:layerType="hardware"
+            android:text="button_run_from" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>
