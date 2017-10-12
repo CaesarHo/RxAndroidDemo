@@ -29,7 +29,6 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Function;
-import io.reactivex.internal.observers.SubscriberCompletableObserver;
 import io.reactivex.observers.DisposableObserver;
 
 import io.reactivex.schedulers.Schedulers;
@@ -74,57 +73,7 @@ public class ScrollingActivity extends AppCompatActivity {
                         Log.d(TAG, "scan call   integer:" + integer + "   integer2:" + integer2);
                         return integer + integer2;
                     }
-                }).subscribe(new Subject<Integer>() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer<? super Integer> observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "Observable.just(1,2,3,4).scan   onCompleted..");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG, "Observable.just(1,2,3,4).scan  onError  " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Integer integer) {
-                        Log.d(TAG, "Observable.just(1,2,3,4).scan  onNext()..  integer = " + integer);
-                        /**
-                         *
-                         * 第一次为1，然后是3(1+2)，6(3+3),10(6+4)
-                         */
-                    }
-                });
+                }).subscribe(onSubject());
             }
         });
 
@@ -137,53 +86,6 @@ public class ScrollingActivity extends AppCompatActivity {
         findViewById(R.id.button_run_flatmap).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Subject subject = new Subject() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-                        Log.d(TAG, "Observable.just(array1,array2).flatMap  integer = " + o);
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "Observable.just(array1,array2).flatMap   onError  " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "Observable.just(array1,array2).flatMap  onCompleted\n\n");
-                    }
-                };
-
                 //flatMap可以实现一个双重转换，在它的回调方法中会返回一个observable对象，但它并不会直接发射这个对象
                 //而是将这个observable对象要发射的值 集中到一个新的observable对象中依次发射
                 //如本例，第一层Observable依次发射两个数组，经过flatmap转换之后，变成变成两个依次发射数组元素的observable
@@ -196,7 +98,7 @@ public class ScrollingActivity extends AppCompatActivity {
                         Observable observable = Observable.fromArray(integers);
                         return observable;
                     }
-                }).subscribe(subject);
+                }).subscribe(onSubject());
             }
         });
 
@@ -253,58 +155,10 @@ public class ScrollingActivity extends AppCompatActivity {
         findViewById(R.id.button_run_range).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Subject subject = new Subject() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-                        Log.e(TAG, "range(3, 7).repeat(2)  onNext:" + o.toString());
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "range(3, 7).repeat(2)  " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "range(3, 7).repeat(2)  onCompleted");
-                    }
-                };
-
-
                 //range 发射从n到m的整数序列 可以指定Scheduler设置执行方法运行的线程
                 //repeat方法可以指定重复触发的次数
                 Observable rangeObservable = Observable.range(3, 7).repeat(2);
-                rangeObservable.subscribe(subject);
+                rangeObservable.subscribe(onSubject());
             }
         });
 
@@ -314,60 +168,11 @@ public class ScrollingActivity extends AppCompatActivity {
         findViewById(R.id.button_run_timer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Subject subject = new Subject() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-                        Log.d(TAG, "timer(...)  onNext:" + o.toString());
-//                        refreshStr("timerObservable 延时两秒触发 发送值：" + o.toString());
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "timer(...)  onError:" + e.getMessage());
-//                        refreshStr("timer(...)  onError:" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "timer(...)  onCompleted");
-//                        refreshStr("timer(...)  onCompleted\n");
-                    }
-                };
                 //timer()创建一个Observable，它在一个给定的延迟后发射一个特殊的值 设定执行方法在UI线程执行
                 //延时两秒后发射值
                 //实测 延时2s后发送了一个0
                 Observable timerObservable = Observable.timer(2, TimeUnit.SECONDS, AndroidSchedulers.mainThread());
-                timerObservable.subscribe(subject);
+                timerObservable.subscribe(onSubject());
             }
         });
 
@@ -378,61 +183,10 @@ public class ScrollingActivity extends AppCompatActivity {
         findViewById(R.id.button_run_just).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Subject subject = new Subject() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-                        Log.d(TAG, "just(...)  onNext:" + o.toString());
-                        if (o instanceof Teacher) {
-                            Teacher teacher = (Teacher) o;
-                            //依次接收到teachers中的对象
-                            Log.d(TAG, "just(...)  onNext2:" + teacher.getI() + "," + teacher.getString1() + "," + teacher.getString2());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.d(TAG, "just(...)  onError:" + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(TAG, "just(...)  onCompleted");
-                    }
-                };
                 //Just类似于From，但是From会将数组或Iterable的元素具取出然后逐个发射，而Just只是简单的原样发射，将数组或Iterable当做单个数据。
                 //Just接受一至九个参数，返回一个按参数列表顺序发射这些数据的Observable
                 Observable justObservable = Observable.just(1, "someThing", false, 3.256f, new Teacher("Wade", 25, "NewYork"));
-                justObservable.subscribe(subject);
+                justObservable.subscribe(onSubject());
             }
         });
 
@@ -444,59 +198,6 @@ public class ScrollingActivity extends AppCompatActivity {
         findViewById(R.id.button_run_from).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Subject subject = new Subject() {
-                    @Override
-                    public boolean hasObservers() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasThrowable() {
-                        return false;
-                    }
-
-                    @Override
-                    public boolean hasComplete() {
-                        return false;
-                    }
-
-                    @Override
-                    public Throwable getThrowable() {
-                        return null;
-                    }
-
-                    @Override
-                    protected void subscribeActual(Observer observer) {
-
-                    }
-
-                    @Override
-                    public void onSubscribe(@NonNull Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(@NonNull Object o) {
-                        //依次接收到teachers中的对象
-                        Log.d(TAG, "from(teachers)  onNext:" + o.toString());
-                        if (o instanceof Teacher) {
-                            Teacher teacher = (Teacher) o;
-                            //依次接收到teachers中的对象
-                            Log.d(TAG, "from(teachers)  onNext2:" + teacher.getI() + "," + teacher.getString1() + "," + teacher.getString2());
-                        }
-                    }
-
-                    @Override
-                    public void onError(@NonNull Throwable e) {
-                        Log.e(TAG, "from(teachers)  " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.i(TAG, "from(teachers)  onCompleted");
-                    }
-                };
-
 
                 //Teacher为一个数据Bean，包含姓名，年龄，住址三个字段
                 List<Teacher> teachers = new ArrayList<>();
@@ -505,10 +206,9 @@ public class ScrollingActivity extends AppCompatActivity {
                 }
                 //from方法支持继承了Interable接口的参数，所以常用的数据结构(Map、List..)都可以转换
                 Observable fromObservale = Observable.fromArray(teachers);
-                fromObservale.subscribe(subject);
+                fromObservale.subscribe(onSubject());
             }
         });
-
 
 
         //fromArray,just,timer,range,scan
@@ -521,6 +221,63 @@ public class ScrollingActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+
+    public Subject onSubject() {
+        Subject subject = new Subject() {
+            @Override
+            public boolean hasObservers() {
+                return false;
+            }
+
+            @Override
+            public boolean hasThrowable() {
+                return false;
+            }
+
+            @Override
+            public boolean hasComplete() {
+                return false;
+            }
+
+            @Override
+            public Throwable getThrowable() {
+                return null;
+            }
+
+            @Override
+            protected void subscribeActual(Observer observer) {
+
+            }
+
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@NonNull Object o) {
+                //依次接收到teachers中的对象
+                Log.d(TAG, "onNext:" + o.toString());
+                if (o instanceof Teacher) {
+                    Teacher teacher = (Teacher) o;
+                    //依次接收到teachers中的对象
+                    Log.d(TAG, " onNext2:" + teacher.getI() + "," + teacher.getString1() + "," + teacher.getString2());
+                }
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+                Log.e(TAG, "onError" + e.getMessage());
+            }
+
+            @Override
+            public void onComplete() {
+                Log.i(TAG, "onCompleted");
+            }
+        };
+        return subject;
     }
 
 

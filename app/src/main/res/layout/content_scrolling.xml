@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/fab_margin"
+            android:textAllCaps="false"
             android:text="button_run_scheduler" />
 
         <Button
@@ -26,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
+            android:textAllCaps="false"
             android:text="button_run_observable" />
 
         <Button
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
+            android:textAllCaps="false"
             android:text="button_run_flatmap" />
 
         <Button
@@ -42,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
-            android:layerType="hardware"
+            android:textAllCaps="false"
             android:text="button_run_map" />
 
         <Button
@@ -51,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
-            android:layerType="hardware"
+            android:textAllCaps="false"
             android:text="button_run_range" />
 
         <Button
@@ -60,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
-            android:layerType="hardware"
+            android:textAllCaps="false"
             android:text="button_run_timer" />
 
         <Button
@@ -69,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
-            android:layerType="hardware"
+            android:textAllCaps="false"
             android:text="button_run_just" />
 
         <Button
@@ -78,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/fab_margin"
-            android:layerType="hardware"
+            android:textAllCaps="false"
             android:text="button_run_from" />
 
     </LinearLayout>
